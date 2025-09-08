@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'page/playerselection.dart';
 import 'page/teams_page.dart';
 import 'state/team_controller.dart';
+import 'page/edit_name_page.dart';
 
 void main() {
   Get.put(TeamController());
@@ -36,6 +37,8 @@ theme: ThemeData(
       getPages: [
         GetPage(name: '/', page: () => const PlayerSelection()), // หน้าใหม่
         GetPage(name: '/teams', page: () => const TeamsPage()),
+        GetPage(name: '/edit-name', page: () => EditNamePage()), // ✅ เพิ่มตรงนี้
+
       ],
     );
   }

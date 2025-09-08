@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../state/team_controller.dart';
 
+
 class PlayerSelection extends StatefulWidget {
   const PlayerSelection({super.key});
+
 
   @override
   State<PlayerSelection> createState() => _PlayerSelectionState();
 }
 
+
 class _PlayerSelectionState extends State<PlayerSelection> {
   final c = Get.find<TeamController>();
+
 
   @override
   void initState() {
@@ -18,15 +22,30 @@ class _PlayerSelectionState extends State<PlayerSelection> {
     if (c.all.isEmpty) c.fetchPlayers();
   }
 
+
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
 
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Team Builder (Pick 3)'),
+       
         actions: [
+              // 2. ย้าย Obx ที่แสดงชื่อผู้เล่นมาไว้ตรงนี้
+    Center(
+      child: Obx(() => Text(c.playerName.value)),
+    ),
+    const SizedBox(width: 8),
+                    IconButton( // ✅ ปุ่มแก้ไขชื่อ เพิ่มตรงนี้ได้เลย
+            tooltip: 'Edit Name',
+            onPressed: () => Get.toNamed('/edit-name'),
+            icon: const Icon(Icons.edit),
+          ),
+         
           IconButton(
+           
             tooltip: 'My Teams',
             onPressed: () => Get.toNamed('/teams'),
             icon: const Icon(Icons.groups_2_outlined),
@@ -44,7 +63,9 @@ class _PlayerSelectionState extends State<PlayerSelection> {
         if (c.loading.value) return const Center(child: CircularProgressIndicator());
         if (c.error.isNotEmpty) return Center(child: Text(c.error.value));
 
+
         final players = c.filtered;
+
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +105,9 @@ class _PlayerSelectionState extends State<PlayerSelection> {
               }),
             ),
 
+
             const SizedBox(height: 8),
+
 
             // --------- รายการทั้งหมด (การ์ดแนวตั้ง) ----------
             Expanded(
@@ -151,6 +174,7 @@ class _PlayerSelectionState extends State<PlayerSelection> {
               ),
             ),
 
+
             // --------- ปุ่ม Create Team ----------
             SafeArea(
               child: Padding(
@@ -182,6 +206,7 @@ class _PlayerSelectionState extends State<PlayerSelection> {
     );
   }
 
+
   Future<String?> _askTeamName(BuildContext context) async {
     final controller = TextEditingController();
     return showDialog<String>(
@@ -204,9 +229,11 @@ class _PlayerSelectionState extends State<PlayerSelection> {
   }
 }
 
+
 class _SearchField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   const _SearchField({required this.onChanged});
+
 
   @override
   Widget build(BuildContext context) {
@@ -232,9 +259,11 @@ class _SearchField extends StatelessWidget {
   }
 }
 
+
 class _EmptyTeamHint extends StatelessWidget {
   final Color color;
   const _EmptyTeamHint({required this.color});
+
 
   @override
   Widget build(BuildContext context) {
@@ -252,11 +281,13 @@ class _EmptyTeamHint extends StatelessWidget {
   }
 }
 
+
 class _SelectedChip extends StatelessWidget {
   final String name;
   final String imageUrl;
   final VoidCallback onRemove;
   const _SelectedChip({required this.name, required this.imageUrl, required this.onRemove});
+
 
   @override
   Widget build(BuildContext context) {
@@ -298,3 +329,6 @@ class _SelectedChip extends StatelessWidget {
     );
   }
 }
+
+
+

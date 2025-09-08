@@ -25,6 +25,8 @@ class Team {
 
 // --------- Controller (GetX) ----------
 class TeamController extends GetxController {
+    var playerName = "Player 1".obs;
+
   final RxList<Player> all = <Player>[].obs;          // สมาชิกทั้งหมดจาก API
   final RxList<Player> selected = <Player>[].obs;     // สมาชิกที่ถูกเลือก (สูงสุด 3)
   final RxList<Team> teams = <Team>[].obs;            // ทีมที่ถูกสร้าง
