@@ -1,0 +1,38 @@
+# Flutter / Dart
+build/
+.dart_tool/
+.pub/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Android
+android/.gradle/
+android/app/build/
+android/local.properties
+
+# iOS
+ios/Pods/
+ios/Runner.xcworkspace
+
+# PocketBase
+pb_data/
+pocketbase/db/
+pocketbase/public/.cache/
+
+# IDE / Editors
+.vscode/
+.idea/
+*.iml
+
+# Backups / Archives
+*.zip
+*.7z
+dssishop_rescue_backup/
+dssishop.zip
+
+# System
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
