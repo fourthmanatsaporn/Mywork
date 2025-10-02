@@ -1,100 +1,31 @@
-# Flutter AI Chat App
+Flutter E-Commerce App โปรเจกต์นี้เป็นแอปพลิเคชัน E-Commerce ตัวอย่าง สร้างด้วย Flutter และใช้ PocketBase เป็นฐานข้อมูล
 
-แอปพลิเคชัน Flutter สำหรับพูดคุยกับ AI ผ่าน API ที่รองรับ OpenAI-compatible (เช่น OpenAI และ Groq)
-รองรับการเลือกผู้ให้บริการหลัก–สำรอง และมีระบบ fallback อัตโนมัติเมื่อ provider หลักล้มเหลว
+ฟีเจอร์หลัก:
 
-## คุณสมบัติ
+หน้าแรก (home.dart): แสดงรายการสินค้าเบื้องต้น
 
-- สนทนากับ AI ผ่าน UI ที่ใช้งานง่าย
-- เก็บประวัติการสนทนา (user/assistant) ภายใน `AIService`
-- ปุ่ม **Clear Chat** สำหรับล้างประวัติการคุย
-- รองรับการเลือก **Primary/Secondary AI Provider** ผ่านไฟล์ `.env`
-- ปรับแต่ง model, temperature, max_tokens ได้ง่าย
+หน้าจัดการสินค้า (product_list_page.dart):
 
-## โครงสร้างโฟลเดอร์หลัก
+แสดงรายการสินค้าทั้งหมด
 
-```
-lib/
- ├─ services/
- │   └─ ai_service.dart   # จัดการ API และประวัติการสนทนา
- ├─ screens/
- │   └─ chat_screen.dart  # UI สำหรับการแชท
- └─ main.dart             # จุดเริ่มต้นของแอป
-.env                      # เก็บคีย์และการตั้งค่า
-```
+สามารถ แก้ไข (Update) และ ลบ (Delete) สินค้าได้
 
-## การตั้งค่าและใช้งาน
+รายการสินค้าอัปเดตอัตโนมัติแบบ Real-time เมื่อข้อมูลในฐานข้อมูลเปลี่ยนแปลง
 
-### 1. Clone โปรเจ็กต์
+สคริปต์เตรียมข้อมูล (pocketbase_seed.dart):
 
-```bash
-git clone https://github.com/your-username/flutter_ai_chat.git
-cd flutter_ai_chat
-```
+ใช้สำหรับสร้างข้อมูลสินค้าตัวอย่าง 100 รายการ เพื่อใช้ทดสอบระบบ
 
-### 2. ติดตั้ง dependencies
+วิธีรันโปรเจกต์:
 
-```bash
-flutter pub get
-```
+1.git clone -b crudpocketbase hhttps://github.com/Freshmanatsanan/MobileDev/
 
-### 3. ตั้งค่า `.env`
+2.cd Work9-10 แล้ว code . จากนั้น flutter pub get
 
-สร้างไฟล์ `.env` ไว้ที่ root ของโปรเจ็กต์ และใส่ค่าดังนี้
+รัน Backend: สั่งรัน PocketBase (./pocketbase serve)
 
-```env
-# เลือกผู้ให้บริการหลัก และสำรอง
-AI_PROVIDER_PRIMARY=openai
-AI_PROVIDER_SECONDARY=groq
+สร้าง Collection: ในหน้า Admin ของ PocketBase สร้าง Collection ชื่อ product พร้อม Fields: name, price, imageUrl
 
-# ค่าเสริม
-SYSTEM_PROMPT=You are a helpful assistant.
-TEMPERATURE=0.7
-MAX_TOKENS=1024
+เพิ่มข้อมูล: รันสคริปต์ dart run pocketbase_seed.dart เพื่อสร้างข้อมูลสินค้า
 
-# OpenAI
-OPENAI_API_KEY=sk-xxxx
-OPENAI_MODEL=gpt-4o-mini
-# OPENAI_BASE_URL=https://api.openai.com   # ถ้าใช้ proxy/custom endpoint ใส่ได้
-
-# Groq
-GROQ_API_KEY=gsk_xxxx
-GROQ_MODEL=llama-3.1-70b-versatile
-# GROQ_BASE_URL=https://api.groq.com/openai
-```
-
-### 4. เพิ่ม .env ใน pubspec.yaml
-
-```yaml
-flutter:
-  assets:
-    - .env
-```
-
-### 5. รันแอป
-
-```bash
-flutter run
-```
-
-## วิธีการใช้งาน
-
-1. พิมพ์ข้อความในช่องข้อความด้านล่าง
-2. กดปุ่ม **ส่ง** หรือกด Enter→ ระบบจะส่งข้อความไปยัง provider หลัก (OpenAI หรือ Groq)→ หากล้มเหลว จะสลับไปใช้อีก provider โดยอัตโนมัติ
-3. สามารถกดปุ่ม **ล้าง (Clear)** เพื่อลบประวัติแชททั้งหมดได้
-
-## ตัวอย่างหน้าจอ
-
-- **หน้าหลัก**: แสดงข้อความผู้ใช้ทางขวา และข้อความจาก AI ทางซ้าย
-- **ปุ่ม Clear**: อยู่บน AppBar ด้านบนขวา
-
-## เทคโนโลยีที่ใช้
-
-- [Flutter](https://flutter.dev/) (Dart)
-- [flutter_dotenv](https://pub.dev/packages/flutter_dotenv) สำหรับโหลดค่าจาก `.env`
-- [http](https://pub.dev/packages/http) สำหรับเชื่อมต่อ API
-- [OpenAI API](https://platform.openai.com/) และ [Groq API](https://groq.com/)
-
-## License
-
-MIT License
+รันแอป: สั่งรันโปรเจกต์ Flutter (flutter run)b กด 2 เพื่อรันผ่าน chrome

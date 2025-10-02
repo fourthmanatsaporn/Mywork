@@ -21,7 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   // เก็บประวัติข้อความแบบง่าย ๆ
   final List<ChatMessage> _messages = [
-    ChatMessage(text: 'สวัสดี! วันนี้อยากถามอะไรครับ:', isUser: false),
+    ChatMessage(text: 'สวัสดี! วันนี้อยากถามอะไรดีคะ!:', isUser: false),
   ];
 
   // แปลงประวัติให้เป็นรูปแบบ API (role/content)
@@ -96,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final provider = dotenv.env['AI_PROVIDER_PRIMARY'] ?? 'openai';
     return Scaffold(
       appBar: AppBar(
-        title: Text('GoDGreat ChatAI (${provider.toUpperCase()})'),
+        title: Text('Fourth ChatAI (${provider.toUpperCase()})'),
         actions: [
           IconButton(
             tooltip: 'ล้างแชท',
